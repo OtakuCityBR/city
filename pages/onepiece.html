@@ -16,17 +16,19 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <!-- HEADER PADRÃO - Manter em todas as páginas de catálogo -->
     <header>
         <div class="logo">
             <img src="https://i.ibb.co/5fx7ydb/OC.png" alt="Otaku City Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="logo-text">OTAKU <span>CITY</span></div>
         </div>
         <div class="header-cta">
+            <!-- ALTERAR: Link para voltar ao catálogo principal -->
             <a href="../catalogo.html" class="cta-button">CATÁLOGO</a>
         </div>
     </header>
 
-    <!-- Loading Screen -->
+    <!-- LOADING SCREEN - Personalizar cores/animação conforme o anime -->
     <div class="onepiece-loading-container" id="loadingContainer">
         <div class="onepiece-loader">
             <div class="onepiece-loader-inner">
@@ -49,38 +51,45 @@
         </div>
     </div>
     
-    <!-- Slider Container -->
+    <!-- SLIDER CONTAINER PRINCIPAL - Container das imagens -->
     <div class="onepiece-slider-container" id="sliderContainer">
         <div class="onepiece-slider-track" id="sliderTrack">
-            <!-- Slides serão adicionados dinamicamente -->
+            <!-- IMPORTANTE: Slides são adicionados dinamicamente via JavaScript -->
+            <!-- Para adaptar: Alterar array de imagens no script.js -->
         </div>
         
-        <!-- Controles de navegação -->
+        <!-- CONTROLES DE NAVEGAÇÃO - Setas para navegar entre imagens -->
         <div class="onepiece-nav-controls">
-            <button class="onepiece-nav-btn onepiece-nav-prev" id="prevBtn" aria-label="Imagem anterior">‹</button>
-            <button class="onepiece-nav-btn onepiece-nav-next" id="nextBtn" aria-label="Próxima imagem">›</button>
+            <!-- CORRIGIDO: Setas agora indicam navegação vertical (↑ ↓) -->
+            <button class="onepiece-nav-btn onepiece-nav-prev" id="prevBtn" aria-label="Imagem anterior">↑</button>
+            <button class="onepiece-nav-btn onepiece-nav-next" id="nextBtn" aria-label="Próxima imagem">↓</button>
         </div>
         
-        <!-- Indicador de posição -->
+        <!-- INDICADOR DE POSIÇÃO - Mostra qual imagem está sendo visualizada -->
         <div class="onepiece-position-indicator" id="positionIndicator">
             <span id="currentPosition">1</span> / <span id="totalImages">0</span>
         </div>
     </div>
     
-    <!-- Botões de ação -->
+    <!-- BOTÕES DE AÇÃO FIXOS - Posicionamento corrigido para não sobrepor -->
     <div class="onepiece-action-buttons">
+        <!-- ALTERAR: Link para voltar ao catálogo do anime específico -->
         <a href="../catalogo.html" class="onepiece-btn onepiece-btn-back">🔙 Voltar</a>
+        <!-- PERSONALIZAR: Mensagem do WhatsApp conforme o anime -->
         <button id="whatsappBtn" class="onepiece-btn onepiece-btn-whatsapp">💬 Quero Esta</button>
     </div>
 
-    <!-- Pré-carregamento de imagens -->
+    <!-- PRÉ-CARREGAMENTO - Container invisível para cache de imagens -->
     <div class="onepiece-preload" id="preloadContainer">
-        <!-- Imagens serão pré-carregadas aqui -->
+        <!-- Imagens são pré-carregadas aqui para melhor performance -->
     </div>
 
+    <!-- FOOTER PADRÃO - Manter estrutura, personalizar texto conforme anime -->
     <footer>
+        <!-- PERSONALIZAR: Emoji e texto conforme o anime (🏴‍☠️ para One Piece) -->
         <h3>🏴‍☠️ ENCONTROU SUA PLACA FAVORITA?</h3>
         <p>Entre em contato e garante já a sua placa do One Piece!</p>
+        <!-- PERSONALIZAR: Mensagem do WhatsApp conforme o anime -->
         <a href="https://wa.me/5511958588616?text=Olá! Gostaria de fazer um pedido de placa do One Piece!" class="whatsapp-button">
             📱 FAZER PEDIDO
         </a>
@@ -94,10 +103,12 @@
         <p class="copyright">© 2025 Otaku City - Qualidade Implacável</p>
     </footer>
 
+    <!-- BOTÃO FLUTUANTE "COMO COMPRAR" - Z-index ajustado para não sobrepor -->
     <button class="floating-help-button" id="helpButton">
         🛒 COMO COMPRAR
     </button>
 
+    <!-- POP-UP DE VÍDEO "COMO COMPRAR" -->
     <div class="video-popup-overlay" id="videoPopup">
         <div class="video-popup-content">
             <button class="video-popup-close" id="closePopup">×</button>
@@ -105,6 +116,7 @@
         </div>
     </div>
 
+    <!-- SCRIPT PRINCIPAL - Contém toda a lógica do slider -->
     <script src="../js/script.js"></script>
 </body>
 </html>

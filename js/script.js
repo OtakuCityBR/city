@@ -331,9 +331,20 @@ function setupLazyLoading() {
 // Inicializar lazy loading
 document.addEventListener('DOMContentLoaded', setupLazyLoading);
 // SISTEMA ONE PIECE SLIDER - OTIMIZADO
+/**
+ * CLASSE ONE PIECE SLIDER
+ * 
+ * COMO ADAPTAR PARA OUTROS ANIMES:
+ * 1. Alterar o array 'this.images' com as URLs das imagens do novo anime
+ * 2. Modificar as mensagens do WhatsApp (método setupEventListeners)
+ * 3. Personalizar cores no CSS (variáveis CSS ou classes específicas)
+ * 4. Ajustar textos e emojis no HTML conforme o tema do anime
+ * 5. Renomear a classe e IDs se necessário (ex: NarutoSlider, DragonBallSlider)
+ */
 class OnePieceSlider {
     constructor() {
-        // Lista de imagens One Piece
+        // ALTERAR: Lista de imagens do anime específico
+        // Para adaptar: Substituir todas as URLs pelas imagens do novo anime
         this.images = [
             "https://i.ibb.co/ksbt0y0w/OP-1.jpg",
             "https://i.ibb.co/xSmzBw27/OP-2.jpg",
@@ -393,12 +404,14 @@ class OnePieceSlider {
             "https://i.ibb.co/0psSbdQD/OP-57.jpg"
         ];
 
+        // Configurações do slider
         this.currentIndex = 0;
         this.loadingHidden = false;
         this.imageCache = new Map();
         this.preloadedImages = new Set();
         
-        // Elementos DOM
+        // IMPORTANTE: Elementos DOM - manter os mesmos IDs em todas as páginas
+        // Para adaptar: Verificar se os IDs existem no HTML da nova página
         this.sliderTrack = document.getElementById('sliderTrack');
         this.whatsappBtn = document.getElementById('whatsappBtn');
         this.loadingContainer = document.getElementById('loadingContainer');
@@ -408,42 +421,52 @@ class OnePieceSlider {
         this.totalImages = document.getElementById('totalImages');
         this.preloadContainer = document.getElementById('preloadContainer');
 
-        // Verificar se estamos na página One Piece
+        // VERIFICAÇÃO: Confirma se estamos na página correta
+        // Para adaptar: Manter esta verificação em todas as páginas de slider
         if (!this.sliderTrack || !this.whatsappBtn) {
+            console.log('Elementos do slider não encontrados - não inicializando');
             return; // Não inicializar se não estivermos na página correta
         }
 
         this.init();
     }
 
+    /**
+     * INICIALIZAÇÃO DO SLIDER
+     * Método principal que configura todo o sistema
+     */
     init() {
         console.log('Inicializando OnePieceSlider...');
         
-        // Configurar total de imagens
+        // CONFIGURAÇÃO: Define o total de imagens no indicador
         if (this.totalImages) {
             this.totalImages.textContent = this.images.length;
         }
         
-        // Pré-carregar primeiras imagens
+        // PERFORMANCE: Pré-carrega as primeiras imagens para carregamento rápido
         this.preloadInitialImages();
         
-        // Criar slides
+        // CRIAÇÃO: Gera os elementos HTML dos slides dinamicamente
         this.createSlides();
         
-        // Configurar eventos
+        // EVENTOS: Configura todos os listeners (cliques, toques, teclado)
         this.setupEventListeners();
         
-        // Atualizar posição inicial
+        // POSICIONAMENTO: Define a posição inicial do slider
         this.updateSliderPosition();
         
-        // Iniciar pré-carregamento em background
+        // OTIMIZAÇÃO: Inicia carregamento das demais imagens em background
         this.startBackgroundPreload();
         
         console.log('OnePieceSlider inicializado com sucesso!');
     }
 
+    /**
+     * PRÉ-CARREGAMENTO INICIAL
+     * Carrega as primeiras 5 imagens para navegação instantânea
+     */
     preloadInitialImages() {
-        // Pré-carrega as primeiras 5 imagens para carregamento instantâneo
+        // PERFORMANCE: Carrega apenas as primeiras imagens para início rápido
         const initialCount = Math.min(5, this.images.length);
         
         for (let i = 0; i < initialCount; i++) {
@@ -451,13 +474,20 @@ class OnePieceSlider {
         }
     }
 
+    /**
+     * PRÉ-CARREGAMENTO DE IMAGEM INDIVIDUAL
+     * @param {string} src - URL da imagem a ser carregada
+     * @returns {Promise} - Promise que resolve quando a imagem carrega
+     */
     preloadImage(src) {
         return new Promise((resolve, reject) => {
+            // CACHE: Verifica se a imagem já está em cache
             if (this.imageCache.has(src)) {
                 resolve(this.imageCache.get(src));
                 return;
             }
 
+            // CARREGAMENTO: Cria nova imagem e configura eventos
             const img = new Image();
             img.onload = () => {
                 this.imageCache.set(src, img);
@@ -467,7 +497,7 @@ class OnePieceSlider {
             img.onerror = reject;
             img.src = src;
             
-            // Adicionar ao container de pré-carregamento para cache do navegador
+            // CACHE DO NAVEGADOR: Adiciona ao DOM invisível para cache
             if (this.preloadContainer) {
                 const preloadImg = img.cloneNode();
                 this.preloadContainer.appendChild(preloadImg);
@@ -475,12 +505,16 @@ class OnePieceSlider {
         });
     }
 
+    /**
+     * PRÉ-CARREGAMENTO EM BACKGROUND
+     * Carrega todas as imagens restantes após a inicialização
+     */
     startBackgroundPreload() {
-        // Pré-carrega todas as imagens em background após o carregamento inicial
+        // OTIMIZAÇÃO: Delay para não interferir no carregamento inicial
         setTimeout(() => {
             this.images.forEach((src, index) => {
                 if (!this.preloadedImages.has(src)) {
-                    // Delay progressivo para não sobrecarregar
+                    // THROTTLING: Delay progressivo para não sobrecarregar a conexão
                     setTimeout(() => {
                         this.preloadImage(src);
                     }, index * 100);
@@ -489,59 +523,81 @@ class OnePieceSlider {
         }, 1000);
     }
 
+    /**
+     * CRIAÇÃO DOS SLIDES
+     * Gera dinamicamente os elementos HTML para cada imagem
+     */
     createSlides() {
         this.images.forEach((imgSrc, index) => {
+            // CRIAÇÃO: Elemento slide individual
             const slide = document.createElement('div');
             slide.className = 'onepiece-slide';
             slide.dataset.index = index;
             
+            // CRIAÇÃO: Elemento de imagem
             const img = document.createElement('img');
             
-            // Se a imagem já está no cache, usar imediatamente
+            // OTIMIZAÇÃO: Carregamento inteligente baseado em cache e posição
             if (this.imageCache.has(imgSrc)) {
+                // Imagem já em cache - carrega imediatamente
                 img.src = imgSrc;
             } else if (index < 3) {
-                // Carregar as primeiras 3 imediatamente
+                // Primeiras 3 imagens - carrega imediatamente
                 img.src = imgSrc;
             } else {
-                // Lazy load para as outras
+                // Demais imagens - lazy loading
                 img.dataset.src = imgSrc;
                 img.loading = "lazy";
             }
             
+            // ACESSIBILIDADE: Alt text descritivo
+            // ALTERAR: Personalizar alt text conforme o anime
             img.alt = `One Piece - Placa decorativa ${index + 1}`;
             
+            // MONTAGEM: Adiciona imagem ao slide e slide ao track
             slide.appendChild(img);
             this.sliderTrack.appendChild(slide);
+            
+            // POSICIONAMENTO: Define posição vertical inicial (100% = uma tela)
             slide.style.transform = `translateY(${index * 100}%)`;
         });
     }
 
+    /**
+     * ATUALIZAÇÃO DA POSIÇÃO DO SLIDER
+     * Move o slider para mostrar a imagem atual
+     */
     updateSliderPosition() {
+        // ANIMAÇÃO: Move o track verticalmente para mostrar a imagem atual
         this.sliderTrack.style.transform = `translateY(-${this.currentIndex * 100}%)`;
         
-        // Atualizar indicador de posição
+        // INTERFACE: Atualiza o contador de posição
         if (this.currentPosition) {
             this.currentPosition.textContent = this.currentIndex + 1;
         }
         
-        // Pré-carregar próximas imagens
+        // OTIMIZAÇÃO: Pré-carrega imagens próximas para navegação suave
         this.preloadNearbyImages();
         
-        // Esconder loading na primeira imagem
+        // INTERFACE: Esconde loading quando chega na primeira imagem
         if (this.currentIndex === 0 && !this.loadingHidden) {
             this.hideLoading();
         }
     }
 
+    /**
+     * PRÉ-CARREGAMENTO DE IMAGENS PRÓXIMAS
+     * Carrega imagens adjacentes para navegação suave
+     */
     preloadNearbyImages() {
-        // Pré-carrega imagens próximas (anterior e próximas 2)
+        // OTIMIZAÇÃO: Define quais imagens carregar (anterior e próximas 2)
         const indicesToPreload = [
             this.currentIndex - 1,
             this.currentIndex + 1,
             this.currentIndex + 2
         ].filter(index => index >= 0 && index < this.images.length);
 
+        // CARREGAMENTO: Pré-carrega cada imagem se ainda não foi carregada
         indicesToPreload.forEach(index => {
             const src = this.images[index];
             if (!this.preloadedImages.has(src)) {
@@ -550,6 +606,10 @@ class OnePieceSlider {
         });
     }
 
+    /**
+     * NAVEGAÇÃO: PRÓXIMA IMAGEM
+     * Move para a próxima imagem se disponível
+     */
     nextImage() {
         if (this.currentIndex < this.images.length - 1) {
             this.currentIndex++;
@@ -558,6 +618,10 @@ class OnePieceSlider {
         }
     }
 
+    /**
+     * NAVEGAÇÃO: IMAGEM ANTERIOR
+     * Move para a imagem anterior se disponível
+     */
     prevImage() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
@@ -566,16 +630,25 @@ class OnePieceSlider {
         }
     }
 
+    /**
+     * CARREGAMENTO DA IMAGEM ATUAL
+     * Força o carregamento da imagem sendo visualizada (lazy loading)
+     */
     loadCurrentImage() {
         const currentSlide = this.sliderTrack.children[this.currentIndex];
         const img = currentSlide.querySelector('img');
         
+        // LAZY LOADING: Carrega imagem se ainda não foi carregada
         if (img && img.dataset.src) {
             img.src = img.dataset.src;
             img.removeAttribute('data-src');
         }
     }
 
+    /**
+     * INTERFACE: ESCONDER LOADING
+     * Remove a tela de carregamento
+     */
     hideLoading() {
         if (!this.loadingHidden && this.loadingContainer) {
             this.loadingContainer.classList.add('hidden');
@@ -584,8 +657,12 @@ class OnePieceSlider {
         }
     }
 
+    /**
+     * CONFIGURAÇÃO DE EVENTOS
+     * Configura todos os listeners de interação do usuário
+     */
     setupEventListeners() {
-        // Botões de navegação
+        // NAVEGAÇÃO: Botões de seta
         if (this.nextBtn) {
             this.nextBtn.addEventListener('click', () => this.nextImage());
         }
@@ -594,23 +671,27 @@ class OnePieceSlider {
             this.prevBtn.addEventListener('click', () => this.prevImage());
         }
 
-        // Configurar gestos de toque
+        // MOBILE: Gestos de toque para navegação
         let startY = 0;
         let isDragging = false;
         
+        // TOQUE: Início do gesto
         this.sliderTrack.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
             isDragging = true;
             this.sliderTrack.style.transition = 'none';
         }, { passive: true });
         
+        // TOQUE: Movimento do dedo
         this.sliderTrack.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const moveY = e.touches[0].clientY;
             const diffY = moveY - startY;
+            // FEEDBACK VISUAL: Move o slider conforme o dedo
             this.sliderTrack.style.transform = `translateY(calc(-${this.currentIndex * 100}% + ${diffY}px))`;
         }, { passive: true });
         
+        // TOQUE: Fim do gesto - decide se muda de imagem
         this.sliderTrack.addEventListener('touchend', (e) => {
             if (!isDragging) return;
             isDragging = false;
@@ -618,18 +699,23 @@ class OnePieceSlider {
             const endY = e.changedTouches[0].clientY;
             const diffY = endY - startY;
             
+            // RESTAURA: Transição suave
             this.sliderTrack.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             
+            // DECISÃO: Muda imagem se o movimento foi suficiente (50px)
             if (diffY < -50 && this.currentIndex < this.images.length - 1) {
+                // Deslizou para cima - próxima imagem
                 this.nextImage();
             } else if (diffY > 50 && this.currentIndex > 0) {
+                // Deslizou para baixo - imagem anterior
                 this.prevImage();
             } else {
+                // Movimento insuficiente - volta à posição original
                 this.updateSliderPosition();
             }
         }, { passive: true });
 
-        // Navegação por teclado
+        // DESKTOP: Navegação por teclado
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
                 e.preventDefault();
@@ -640,33 +726,44 @@ class OnePieceSlider {
             }
         });
 
-        // Botão WhatsApp
+        // WHATSAPP: Configuração do botão de contato
+        // ALTERAR: Personalizar mensagem conforme o anime
         if (this.whatsappBtn) {
             this.whatsappBtn.addEventListener('click', () => {
                 const currentImageUrl = this.images[this.currentIndex];
+                // PERSONALIZAR: Mensagem específica do anime
                 const message = `🏴‍☠️ Olá! Quero esta placa do One Piece: ${currentImageUrl}`;
                 const whatsappUrl = `https://wa.me/5511958588616?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
             });
         }
 
-        // Esconder loading quando primeira imagem carregar
+        // LOADING: Esconde quando primeira imagem carrega
         const firstImage = this.sliderTrack.querySelector('img');
         if (firstImage) {
             firstImage.onload = () => this.hideLoading();
             firstImage.onerror = () => this.hideLoading();
         }
         
-        // Fallback para esconder loading
+        // FALLBACK: Esconde loading após 3 segundos mesmo se imagem não carregar
         setTimeout(() => this.hideLoading(), 3000);
     }
 }
 
-// Inicializar One Piece Slider quando DOM carregar
+/**
+ * INICIALIZAÇÃO AUTOMÁTICA
+ * Detecta se estamos na página correta e inicializa o slider
+ * 
+ * PARA ADAPTAR:
+ * 1. Manter esta estrutura em todas as páginas de slider
+ * 2. Alterar o nome da classe se necessário
+ * 3. Verificar se o ID 'sliderTrack' existe na nova página
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    // Verificar se estamos na página One Piece
+    // DETECÇÃO: Verifica se estamos numa página de slider
     if (document.getElementById('sliderTrack')) {
-        console.log('Página One Piece detectada - inicializando slider...');
+        console.log('Página de slider detectada - inicializando...');
+        // INICIALIZAÇÃO: Cria nova instância do slider
         const onePieceSlider = new OnePieceSlider();
     }
 });
