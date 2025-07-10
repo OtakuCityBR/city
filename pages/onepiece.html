@@ -16,80 +16,36 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <!-- HEADER PADRÃO - Manter em todas as páginas de catálogo -->
+    <!-- HEADER PADRÃO -->
     <header>
         <div class="logo">
             <img src="https://i.ibb.co/5fx7ydb/OC.png" alt="Otaku City Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="logo-text">OTAKU <span>CITY</span></div>
         </div>
         <div class="header-cta">
-            <!-- ALTERAR: Link para voltar ao catálogo principal -->
-            <a href="../catalogo.html" class="cta-button">CATÁLOGO</a>
+            <a href="catalogo.html" class="cta-button">CATÁLOGO</a>
         </div>
     </header>
 
-    <!-- LOADING SCREEN - Personalizar cores/animação conforme o anime -->
-    <div class="onepiece-loading-container" id="loadingContainer">
-        <div class="onepiece-loader">
-            <div class="onepiece-loader-inner">
-                <div class="onepiece-loader-line-wrap">
-                    <div class="onepiece-loader-line"></div>
-                </div>
-                <div class="onepiece-loader-line-wrap">
-                    <div class="onepiece-loader-line"></div>
-                </div>
-                <div class="onepiece-loader-line-wrap">
-                    <div class="onepiece-loader-line"></div>
-                </div>
-                <div class="onepiece-loader-line-wrap">
-                    <div class="onepiece-loader-line"></div>
-                </div>
-                <div class="onepiece-loader-line-wrap">
-                    <div class="onepiece-loader-line"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- SLIDER CONTAINER PRINCIPAL - Container das imagens -->
-    <div class="onepiece-slider-container" id="sliderContainer">
-        <div class="onepiece-slider-track" id="sliderTrack">
-            <!-- IMPORTANTE: Slides são adicionados dinamicamente via JavaScript -->
-            <!-- Para adaptar: Alterar array de imagens no script.js -->
-        </div>
-        
-        <!-- CONTROLES DE NAVEGAÇÃO - Setas para navegar entre imagens -->
-        <div class="onepiece-nav-controls">
-            <!-- CORRIGIDO: Setas agora indicam navegação vertical (↑ ↓) -->
-            <button class="onepiece-nav-btn onepiece-nav-prev" id="prevBtn" aria-label="Imagem anterior">↑</button>
-            <button class="onepiece-nav-btn onepiece-nav-next" id="nextBtn" aria-label="Próxima imagem">↓</button>
-        </div>
-        
-        <!-- INDICADOR DE POSIÇÃO - Mostra qual imagem está sendo visualizada -->
-        <div class="onepiece-position-indicator" id="positionIndicator">
-            <span id="currentPosition">1</span> / <span id="totalImages">0</span>
-        </div>
-    </div>
-    
-    <!-- BOTÕES DE AÇÃO FIXOS - Posicionamento corrigido para não sobrepor -->
-    <div class="onepiece-action-buttons">
-        <!-- ALTERAR: Link para voltar ao catálogo do anime específico -->
-        <a href="../catalogo.html" class="onepiece-btn onepiece-btn-back">🔙 Voltar</a>
-        <!-- PERSONALIZAR: Mensagem do WhatsApp conforme o anime -->
-        <button id="whatsappBtn" class="onepiece-btn onepiece-btn-whatsapp">💬 Quero Esta</button>
-    </div>
+    <!-- SEÇÃO DE TÍTULO DA PÁGINA -->
+    <section class="page-header">
+        <a href="catalogo.html" class="back-button">← Voltar ao Catálogo</a>
+        <h1 class="page-title">🏴‍☠️ ONE PIECE</h1>
+        <p class="page-subtitle">Escolha sua placa favorita do One Piece! Clique em "Quero Esta" na imagem desejada.</p>
+    </section>
 
-    <!-- PRÉ-CARREGAMENTO - Container invisível para cache de imagens -->
-    <div class="onepiece-preload" id="preloadContainer">
-        <!-- Imagens são pré-carregadas aqui para melhor performance -->
-    </div>
+    <!-- MOSTRUÁRIO DE IMAGENS - GRID RESPONSIVO -->
+    <section class="onepiece-gallery-section">
+        <div class="onepiece-gallery-grid" id="galleryGrid">
+            <!-- IMPORTANTE: Imagens serão adicionadas dinamicamente via JavaScript -->
+            <!-- Cada imagem terá seu próprio botão "Quero Esta" -->
+        </div>
+    </section>
 
-    <!-- FOOTER PADRÃO - Manter estrutura, personalizar texto conforme anime -->
+    <!-- FOOTER PADRÃO -->
     <footer>
-        <!-- PERSONALIZAR: Emoji e texto conforme o anime (🏴‍☠️ para One Piece) -->
         <h3>🏴‍☠️ ENCONTROU SUA PLACA FAVORITA?</h3>
-        <p>Entre em contato e garante já a sua placa do One Piece!</p>
-        <!-- PERSONALIZAR: Mensagem do WhatsApp conforme o anime -->
+        <p>Entre em contato e garanta já a sua placa do One Piece!</p>
         <a href="https://wa.me/5511958588616?text=Olá! Gostaria de fazer um pedido de placa do One Piece!" class="whatsapp-button">
             📱 FAZER PEDIDO
         </a>
@@ -103,7 +59,7 @@
         <p class="copyright">© 2025 Otaku City - Qualidade Implacável</p>
     </footer>
 
-    <!-- BOTÃO FLUTUANTE "COMO COMPRAR" - Z-index ajustado para não sobrepor -->
+    <!-- BOTÃO FLUTUANTE "COMO COMPRAR" -->
     <button class="floating-help-button" id="helpButton">
         🛒 COMO COMPRAR
     </button>
@@ -116,7 +72,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT PRINCIPAL - Contém toda a lógica do slider -->
+    <!-- SCRIPT PRINCIPAL -->
     <script src="../js/script.js"></script>
 </body>
 </html>

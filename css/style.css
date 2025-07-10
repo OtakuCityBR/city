@@ -835,344 +835,150 @@ footer {
     border-bottom: none;
 }
 
-/* ===== ESTILOS ONE PIECE SLIDER ===== */
+/* ===== ESTILOS ONE PIECE GALLERY (MOSTRUÁRIO) ===== */
 
-/* Loading Screen One Piece */
-.onepiece-loading-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-.onepiece-loading-container.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.onepiece-loader {
-    width: 100px;
-    height: 100px;
-}
-
-.onepiece-loader-inner {
-    height: 100%;
-    width: 100%;
-    animation: onepiece-rotate 2s linear infinite;
-}
-
-.onepiece-loader-line-wrap {
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    overflow: hidden;
-    transform-origin: 50% 100%;
-    animation: onepiece-spin 4s linear infinite;
-}
-
-.onepiece-loader-line-wrap:nth-child(1) { animation-delay: -0.8s; }
-.onepiece-loader-line-wrap:nth-child(2) { animation-delay: -0.6s; }
-.onepiece-loader-line-wrap:nth-child(3) { animation-delay: -0.4s; }
-.onepiece-loader-line-wrap:nth-child(4) { animation-delay: -0.2s; }
-.onepiece-loader-line-wrap:nth-child(5) { animation-delay: 0s; }
-
-.onepiece-loader-line {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    animation: onepiece-colorChange 3s ease-in-out infinite;
-}
-
-@keyframes onepiece-rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes onepiece-spin {
-    0%, 15% { transform: rotate(0); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes onepiece-colorChange {
-    0% { background: var(--primary); }
-    50% { background: var(--secondary); }
-    100% { background: var(--primary); }
-}
-
-/* Container principal do slider */
-.onepiece-slider-container {
-    position: fixed;
-    top: 80px; /* Altura do header */
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 140px); /* CORRIGIDO: Altura ajustada para não sobrepor botões */
-    overflow: hidden;
+/* SEÇÃO GALLERY ONE PIECE - MOSTRUÁRIO DE IMAGENS */
+.onepiece-gallery-section {
+    padding: 30px 15px;
     background: var(--dark);
+    min-height: 60vh;
 }
 
-.onepiece-slider-track {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-}
-
-/* Slides individuais */
-.onepiece-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    will-change: transform;
-    backface-visibility: hidden;
-}
-
-.onepiece-slide img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    display: block;
+/* GRID RESPONSIVO PARA AS IMAGENS */
+.onepiece-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1400px;
     margin: 0 auto;
-    transition: opacity 0.3s ease;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 0 10px;
 }
 
-.onepiece-slide img[data-src] {
-    opacity: 0.7;
-}
-
-.onepiece-slide img[src] {
-    opacity: 1;
-}
-
-/* Controles de navegação */
-.onepiece-nav-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    flex-direction: column; /* CORRIGIDO: Navegação vertical */
-    align-items: flex-end; /* CORRIGIDO: Alinhamento à direita */
-    gap: 15px; /* CORRIGIDO: Espaçamento entre botões */
-    padding: 0 20px;
-    pointer-events: none;
-    z-index: 10;
-    transform: translateY(-50%); /* CORRIGIDO: Centralização vertical */
-}
-
-.onepiece-nav-btn {
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.8rem; /* CORRIGIDO: Tamanho maior para setas verticais */
-    cursor: pointer;
+/* CARD INDIVIDUAL DE CADA IMAGEM */
+.onepiece-gallery-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-    pointer-events: all;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
     backdrop-filter: blur(5px);
-    font-weight: bold; /* CORRIGIDO: Setas mais visíveis */
+    position: relative;
+    overflow: hidden;
 }
 
-.onepiece-nav-btn:hover {
-    background: var(--primary);
-    transform: scale(1.1);
+.onepiece-gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 45, 84, 0.3);
+    border-color: var(--primary);
 }
 
-.onepiece-nav-btn:active {
-    transform: scale(0.95);
-}
-
-/* Indicador de posição */
-.onepiece-position-indicator {
-    position: absolute;
-    top: 20px;
-    left: 20px; /* CORRIGIDO: Movido para esquerda para não conflitar com navegação */
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    backdrop-filter: blur(5px);
-    z-index: 10;
-}
-
-/* Botões de ação */
-.onepiece-action-buttons {
-    position: fixed;
-    bottom: 80px; /* CORRIGIDO: Espaço para o botão flutuante */
+/* IMAGEM DENTRO DO CARD */
+.onepiece-gallery-item img {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 0 20px;
-    z-index: 50; /* CORRIGIDO: Z-index menor que o botão flutuante */
-    height: 60px;
-    align-items: center;
+    height: 350px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.onepiece-btn {
-    padding: 12px 25px;
+.onepiece-gallery-item:hover img {
+    border-color: var(--primary);
+    transform: scale(1.02);
+}
+
+/* BOTÃO "QUERO ESTA" INDIVIDUAL */
+.onepiece-gallery-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
     border: none;
     border-radius: 25px;
     font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    text-decoration: none;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 120px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 45, 84, 0.3);
+    text-decoration: none;
+    display: inline-block;
 }
 
-.onepiece-btn-back {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.onepiece-btn-back:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.onepiece-btn-whatsapp {
-    background: #25D366;
-    color: white;
-}
-
-.onepiece-btn-whatsapp:hover {
-    background: #1ea952;
+.onepiece-gallery-btn:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 45, 84, 0.5);
+    color: white;
 }
 
-/* Container de pré-carregamento */
-.onepiece-preload {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
+.onepiece-gallery-btn:active {
+    transform: translateY(0) scale(1.02);
 }
 
-/* CORRIGIDO: Botão flutuante com z-index maior para não ser sobreposto */
-.floating-help-button {
-    z-index: 1000 !important; /* CORRIGIDO: Z-index maior que os botões de ação */
+/* LOADING PARA IMAGENS */
+.onepiece-gallery-item img[data-src] {
+    opacity: 0.7;
+    filter: blur(2px);
 }
 
-/* CORRIGIDO: Footer ajustado para páginas de slider */
-body:has(.onepiece-slider-container) footer {
-    margin-top: 0; /* CORRIGIDO: Remove margem superior */
-    position: relative; /* CORRIGIDO: Posicionamento relativo */
-    z-index: 1; /* CORRIGIDO: Z-index baixo */
+.onepiece-gallery-item img[src] {
+    opacity: 1;
+    filter: none;
 }
 
-/* CORRIGIDO: Logo do footer não trava mais */
-body:has(.onepiece-slider-container) .footer-logo {
-    position: static; /* CORRIGIDO: Remove posicionamento fixo */
-    transform: none; /* CORRIGIDO: Remove transformações */
-}
-/* Responsividade para mobile */
+/* RESPONSIVIDADE MOBILE */
 @media (max-width: 768px) {
-    .onepiece-slider-container {
-        top: 70px;
-        height: calc(100vh - 120px); /* CORRIGIDO: Altura ajustada para mobile */
+    .onepiece-gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 0 5px;
     }
     
-    .onepiece-nav-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem; /* CORRIGIDO: Tamanho ajustado para mobile */
+    .onepiece-gallery-item {
+        padding: 12px;
     }
     
-    .onepiece-nav-controls {
-        padding: 0 15px;
-        gap: 12px; /* CORRIGIDO: Espaçamento menor no mobile */
+    .onepiece-gallery-item img {
+        height: 300px;
     }
     
-    .onepiece-position-indicator {
-        top: 15px;
-        left: 15px; /* CORRIGIDO: Mantém posição à esquerda */
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-    
-    .onepiece-action-buttons {
-        bottom: 70px; /* CORRIGIDO: Espaço para botão flutuante no mobile */
-        padding: 0 15px;
-        height: 50px;
-    }
-    
-    .onepiece-btn {
-        padding: 10px 20px;
+    .onepiece-gallery-btn {
+        padding: 10px 16px;
         font-size: 0.9rem;
-        min-width: 100px;
-    }
-    
-    .onepiece-slide img {
-        max-width: 95%;
-        max-height: 95%;
     }
 }
 
 @media (max-width: 480px) {
-    .onepiece-slider-container {
-        top: 65px;
-        height: calc(100vh - 110px); /* CORRIGIDO: Altura ajustada para telas pequenas */
+    .onepiece-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
-    .onepiece-nav-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1.2rem; /* CORRIGIDO: Tamanho ajustado */
+    .onepiece-gallery-item {
+        padding: 10px;
     }
     
-    .onepiece-nav-controls {
-        padding: 0 10px;
-        gap: 10px; /* CORRIGIDO: Espaçamento menor */
+    .onepiece-gallery-item img {
+        height: 280px;
     }
     
-    .onepiece-position-indicator {
-        top: 10px;
-        left: 10px; /* CORRIGIDO: Mantém posição à esquerda */
-        padding: 4px 10px;
-        font-size: 0.75rem;
+    .onepiece-gallery-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* AJUSTES PARA TELAS GRANDES */
+@media (min-width: 1200px) {
+    .onepiece-gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
     }
     
-    .onepiece-action-buttons {
-        bottom: 60px; /* CORRIGIDO: Espaço para botão flutuante */
-        padding: 0 10px;
-        height: 45px;
-    }
-    
-    .onepiece-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-        min-width: 90px;
+    .onepiece-gallery-item img {
+        height: 400px;
     }
 }
 
