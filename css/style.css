@@ -876,7 +876,8 @@ footer {
 /* IMAGEM DENTRO DO CARD */
 .onepiece-gallery-item img {
     width: 100%;
-    height: 350px;
+    height: 400px; /* Altura aumentada para proporção 9:16 */
+    aspect-ratio: 9 / 16; /* Força proporção retrato 9:16 */
     object-fit: cover;
     object-position: center;
     border-radius: 10px;
@@ -941,7 +942,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 300px;
+        height: 350px; /* Altura ajustada para mobile mantendo 9:16 */
+        aspect-ratio: 9 / 16;
     }
     
     .onepiece-gallery-btn {
@@ -961,7 +963,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 280px;
+        height: 320px; /* Altura ajustada para mobile pequeno mantendo 9:16 */
+        aspect-ratio: 9 / 16;
     }
     
     .onepiece-gallery-btn {
@@ -978,7 +981,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 400px;
+        height: 450px; /* Altura aumentada para telas grandes mantendo 9:16 */
+        aspect-ratio: 9 / 16;
     }
 }
 
