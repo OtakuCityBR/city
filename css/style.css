@@ -876,19 +876,14 @@ footer {
 /* IMAGEM DENTRO DO CARD */
 .onepiece-gallery-item img {
     width: 100%;
-    height: 400px; /* Altura aumentada para proporção 9:16 */
-    aspect-ratio: 9 / 16; /* Força proporção retrato 9:16 */
+    height: 400px; /* Altura para proporção A4 */
+    aspect-ratio: 1 / 1.414; /* Proporção A4 REAL (1:1.414) */
     object-fit: cover;
     object-position: center;
     border-radius: 10px;
     margin-bottom: 15px;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.onepiece-gallery-item:hover img {
-    border-color: var(--primary);
-    transform: scale(1.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* REMOVIDO: Todas as transições e interações para melhor performance */
 }
 
 /* BOTÃO "QUERO ESTA" INDIVIDUAL */
@@ -942,8 +937,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 400px; /* Altura aumentada para mobile mantendo 9:16 */
-        aspect-ratio: 9 / 16;
+        height: 350px; /* Altura para mobile mantendo A4 */
+        aspect-ratio: 1 / 1.414; /* Proporção A4 */
         width: 100% !important; /* Força largura total */
         object-fit: cover !important; /* Força cobertura */
         object-position: center !important; /* Centraliza imagem */
@@ -967,8 +962,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 280px; /* Altura otimizada para 2 colunas */
-        aspect-ratio: 9 / 16;
+        height: 250px; /* Altura otimizada para 2 colunas A4 */
+        aspect-ratio: 1 / 1.414; /* Proporção A4 */
         width: 100% !important;
         object-fit: cover !important;
         object-position: center !important;
@@ -993,8 +988,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 320px; /* Altura para tela única coluna */
-        aspect-ratio: 9 / 16;
+        height: 280px; /* Altura para tela única coluna A4 */
+        aspect-ratio: 1 / 1.414; /* Proporção A4 */
         width: 100% !important;
         object-fit: cover !important;
         object-position: center !important;
@@ -1014,8 +1009,8 @@ footer {
     }
     
     .onepiece-gallery-item img {
-        height: 450px; /* Altura aumentada para telas grandes mantendo 9:16 */
-        aspect-ratio: 9 / 16;
+        height: 420px; /* Altura para telas grandes mantendo A4 */
+        aspect-ratio: 1 / 1.414; /* Proporção A4 */
     }
 }
 
