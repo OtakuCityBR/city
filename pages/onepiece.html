@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo One Piece - Otaku City | Placas decorativas exclusivas do anime One Piece com qualidade implacável.">
+    <meta name="keywords" content="One Piece, placas decorativas, Luffy, Zoro, Sanji, anime, decoração otaku">
+    <title>One Piece - Otaku City | Placas Decorativas Exclusivas</title>
+    
+    <!-- Pré-conexões para performance -->
+    <link rel="preconnect" href="https://i.ibb.co">
+    <link rel="dns-prefetch" href="https://i.ibb.co">
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="dns-prefetch" href="https://web.whatsapp.com">
+    
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://i.ibb.co/5fx7ydb/OC.png" alt="Otaku City Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="logo-text">OTAKU <span>CITY</span></div>
+        </div>
+        <div class="header-cta">
+            <a href="../catalogo.html" class="cta-button">CATÁLOGO</a>
+        </div>
+    </header>
+
+    <!-- Loading Screen -->
+    <div class="onepiece-loading-container" id="loadingContainer">
+        <div class="onepiece-loader">
+            <div class="onepiece-loader-inner">
+                <div class="onepiece-loader-line-wrap">
+                    <div class="onepiece-loader-line"></div>
+                </div>
+                <div class="onepiece-loader-line-wrap">
+                    <div class="onepiece-loader-line"></div>
+                </div>
+                <div class="onepiece-loader-line-wrap">
+                    <div class="onepiece-loader-line"></div>
+                </div>
+                <div class="onepiece-loader-line-wrap">
+                    <div class="onepiece-loader-line"></div>
+                </div>
+                <div class="onepiece-loader-line-wrap">
+                    <div class="onepiece-loader-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slider Container -->
+    <div class="onepiece-slider-container" id="sliderContainer">
+        <div class="onepiece-slider-track" id="sliderTrack">
+            <!-- Slides serão adicionados dinamicamente -->
+        </div>
+        
+        <!-- Controles de navegação -->
+        <div class="onepiece-nav-controls">
+            <button class="onepiece-nav-btn onepiece-nav-prev" id="prevBtn" aria-label="Imagem anterior">‹</button>
+            <button class="onepiece-nav-btn onepiece-nav-next" id="nextBtn" aria-label="Próxima imagem">›</button>
+        </div>
+        
+        <!-- Indicador de posição -->
+        <div class="onepiece-position-indicator" id="positionIndicator">
+            <span id="currentPosition">1</span> / <span id="totalImages">0</span>
+        </div>
+    </div>
+    
+    <!-- Botões de ação -->
+    <div class="onepiece-action-buttons">
+        <a href="../catalogo.html" class="onepiece-btn onepiece-btn-back">🔙 Voltar</a>
+        <button id="whatsappBtn" class="onepiece-btn onepiece-btn-whatsapp">💬 Quero Esta</button>
+    </div>
+
+    <!-- Pré-carregamento de imagens -->
+    <div class="onepiece-preload" id="preloadContainer">
+        <!-- Imagens serão pré-carregadas aqui -->
+    </div>
+
+    <footer>
+        <h3>🏴‍☠️ ENCONTROU SUA PLACA FAVORITA?</h3>
+        <p>Entre em contato e garante já a sua placa do One Piece!</p>
+        <a href="https://wa.me/5511958588616?text=Olá! Gostaria de fazer um pedido de placa do One Piece!" class="whatsapp-button">
+            📱 FAZER PEDIDO
+        </a>
+
+        <div class="footer-logo">
+            <img src="https://i.ibb.co/y3wvPbx/OCT.png" alt="Otaku City Logo">
+        </div>
+
+        <hr class="footer-divider">
+
+        <p class="copyright">© 2025 Otaku City - Qualidade Implacável</p>
+    </footer>
+
+    <button class="floating-help-button" id="helpButton">
+        🛒 COMO COMPRAR
+    </button>
+
+    <div class="video-popup-overlay" id="videoPopup">
+        <div class="video-popup-content">
+            <button class="video-popup-close" id="closePopup">×</button>
+            <iframe class="video-popup-iframe" id="popupVideo" src="" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
